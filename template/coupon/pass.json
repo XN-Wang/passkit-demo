@@ -4,5 +4,13 @@
     "serialNumber": "12345",
     "organizationName": "WeTechnology HongKong Limited",
     "backgroundColor": "rgb(255,255,255)",
-    "logoText": "50% OFF"
+    "logoText": "50% OFF",
+    "formatVersion": "1",
+    "description": "test passkit",
+    "barcode": {
+      "message": "123456789",
+      "format": "PKBarcodeFormatQR",
+      "altText": "Scan to redeem",
+      "messageEncoding": "iso-8859-1"
+    }
 }
