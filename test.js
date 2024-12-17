@@ -42,7 +42,6 @@ function createPass(iconBuffer, logoBuffer) {
       "icon.png": iconBuffer,
       "logo.png": logoBuffer,
       "thumbnail.png": logoBuffer,
-      //"artwork.png": logoBuffer,
       "strip.png": iconBuffer,
       'venueMap.png': iconBuffer
     },
