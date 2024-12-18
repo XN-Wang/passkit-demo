@@ -37,13 +37,65 @@ async function downloadImage(url, outputPath) {
 
 // Function to create a PKPass
 function createPass(iconBuffer, logoBuffer) {
+//   const pass = new PKPass(
+//     {
+//       "icon.png": iconBuffer,
+//       "logo.png": logoBuffer,
+//       "thumbnail.png": logoBuffer,
+//       "strip.png": iconBuffer,
+//       'venueMap.png': iconBuffer
+//     },
+//     {
+//       signerCert: signerCert,
+//       signerKey: signerKey,
+//       wwdr: wwdr,
+//     },
+//     {
+//       formatVersion: 1,
+//       passTypeIdentifier: "pass.potos.hk.verifiable.certificate",
+//       teamIdentifier: "2674TW3P6H",
+//       serialNumber: `nmyuxofgna${Math.random()}`,
+//       organizationName: "WeTechnology HongKong Limited",
+//       description: "Example Apple Wallet Pass",
+//       backgroundColor: "rgb(206, 140, 53)",
+//     }
+//   );
+
+//   pass.type = "eventTicket";
+//   pass.setBarcodes({
+//     message: "https://award.eight-art.com/#/explore",
+//     messageEncoding: "iso-8859-1",
+//     altText: "Scan this QR Code",
+//     format: "PKBarcodeFormatQR",
+//   });
+
+//   pass.headerFields.push(
+//     {
+//       key: "header-field-test-1",
+//       value: "HKChain",
+//     },
+//     {
+//       key: "header-field-test-2",
+//       value: "gold price",
+//     }
+//   );
+
+//   pass.primaryFields.push(
+//     {
+//       key: "primaryField-1",
+//       value: "winner",
+//     },
+//     {
+//       key: "primaryField-2",
+//       value: "date",
+//     }
+//   );
+
+  // Add other fields as necessary, but no "image" field (not supported by the schema)
   const pass = new PKPass(
     {
-      "icon.png": iconBuffer,
-      "logo.png": logoBuffer,
-      "thumbnail.png": logoBuffer,
-      "strip.png": iconBuffer,
-      'venueMap.png': iconBuffer
+      'icon.png': join(__dirname, '/assets/logo.png'),
+      'thumbnail.png': thumbnailBuffer,
     },
     {
       signerCert: signerCert,
@@ -52,46 +104,47 @@ function createPass(iconBuffer, logoBuffer) {
     },
     {
       formatVersion: 1,
-      passTypeIdentifier: "pass.potos.hk.verifiable.certificate",
-      teamIdentifier: "2674TW3P6H",
-      serialNumber: `nmyuxofgna${Math.random()}`,
-      organizationName: "WeTechnology HongKong Limited",
-      description: "Example Apple Wallet Pass",
-      backgroundColor: "rgb(206, 140, 53)",
-    }
-  );
-
-  pass.type = "eventTicket";
-  pass.setBarcodes({
-    message: "https://award.eight-art.com/#/explore",
-    messageEncoding: "iso-8859-1",
-    altText: "Scan this QR Code",
-    format: "PKBarcodeFormatQR",
-  });
-
-  pass.headerFields.push(
-    {
-      key: "header-field-test-1",
-      value: "HKChain",
+      passTypeIdentifier: 'pass.potos.hk.verifiable.certificate',
+      teamIdentifier: '2674TW3P6H',
+      serialNumber: `potosapsskit${Math.random()}`,
+      organizationName: 'WeTechnology HongKong Limited',
+      description: 'Potos Award Wallet Pass',
+      backgroundColor: 'rgb(206, 140, 53)',
     },
-    {
-      key: "header-field-test-2",
-      value: "gold price",
-    }
-  );
+  )
+
+  pass.type = 'eventTicket'
+  pass.setBarcodes({
+    message: `https://award.eight-art.com/#/explore/${contractAddress}/${tokenId}`,
+    messageEncoding: 'iso-8859-1',
+    format: 'PKBarcodeFormatQR',
+  })
 
   pass.primaryFields.push(
     {
-      key: "primaryField-1",
-      value: "winner",
+      key: 'name',
+      label: 'Award',
+      value: award?.name,
     },
     {
-      key: "primaryField-2",
-      value: "date",
-    }
-  );
+      key: 'event',
+      label: 'Event',
+      value: award?.description,
+    },
+  )
 
-  // Add other fields as necessary, but no "image" field (not supported by the schema)
+  pass.secondaryFields.push(
+    {
+      key: 'tokenId',
+      label: 'tokenId',
+      value: award?.winner,
+    },
+    {
+      key: 'date',
+      label: 'Date',
+      value: moment(award?.date).format('YYYY-MM-DD'),
+    },
+  )
   return pass;
 }
 
