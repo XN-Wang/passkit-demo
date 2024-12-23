@@ -22,6 +22,9 @@ try {
 			signerCert,
 			signerKey,
 		},
+        buffer: {
+            'logo.png': 'https://github.com/XN-Wang/passkit-demo/blob/5e227b3e2731e6583edc369465e94b2f5c00addc/template/Coupon.pass/logo.png'
+        }
 	}).then(pass => {
     const buffer = pass.getAsBuffer();
     fs.writeFileSync(path.join(__dirname, 'myPass.pkpass'), buffer);
