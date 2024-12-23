@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My GitHub Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f7f7f7;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="download(1)">据说支持google wallet</button>
+    <button onclick="download(2)">base coupon，图片使用本地， 默认小图片</button>
+    <button onclick="download(3)">使用小图片的pass</button>
+    <button onclick="download(4)">使用大图片的pass，图片为url</button>
+    <script>
+        function download(number) {
+            let src = ''
+            switch(number) {
+                case 1: src='https://github.com/XN-Wang/passkit-demo/raw/refs/heads/gh-pages/pass-test/Pass-Example-Generic.pkpass';break;
+                case 2: src='https://github.com/XN-Wang/passkit-demo/raw/refs/heads/gh-pages/pass-test/myPass.pkpass';break;
+                case 3: src='https://github.com/XN-Wang/passkit-demo/raw/refs/heads/gh-pages/pass-test/award.pkpass';break;
+                case 4: src='https://github.com/XN-Wang/passkit-demo/raw/refs/heads/gh-pages/pass-test/0x9C3C66b2b3bB455657299ed1fda33e70cEB651F9-2-eb1083793994aae939127a4481792f58.pkpass';break;
+            }
+            window.open(src)
+        }
+    </script>
+</body>
+</html>
